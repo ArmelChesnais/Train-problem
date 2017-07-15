@@ -26,16 +26,31 @@ describe('Network',function(){
     assert.equal(net.findStation('A'), statA, 'can find a station');
   });
 
-  let graphNet = new Network('AB1, BC2, CD4, DE8');
-  it('Should create a network Object given a graph string', function() {
-    assert.instanceOf(graphNet, Network, 'is an instance of Network');
-    assert.exists(graphNet.findStation('A'), 'has station A');
-    assert.exists(graphNet.findStation('B'), 'has station B');
-    assert.exists(graphNet.findStation('E'), 'has station E');
-    assert.notExists(graphNet.findStation('Z'), 'does not have station Z');
-    assert.equal(graphNet.getDistanceOfPath('A-B-C-D-E'), 15, 'path should be 15')
-    assert.equal(graphNet.getDistanceOfPath('E-C-D'), 'NO SUCH ROUTE', 'no such route')
-
+  describe('Network created with graph string', function(){
+    let graphNet = new Network('AB1, BC2, CD4, DE8');
+    it('Should create a network Object given a graph string', function() {
+      assert.instanceOf(graphNet, Network, 'is an instance of Network');
+      assert.exists(graphNet.findStation('A'), 'has station A');
+      assert.exists(graphNet.findStation('B'), 'has station B');
+      assert.exists(graphNet.findStation('E'), 'has station E');
+      assert.notExists(graphNet.findStation('Z'), 'does not have station Z');
+    });
+    it('Should find the distance of paths', function(){
+      assert.equal(graphNet.getDistanceOfPath('A-B-C-D-E'), 15, 'path should be 15')
+      assert.equal(graphNet.getDistanceOfPath('E-C-D'), 'NO SUCH ROUTE', 'no such route')
+    });
+    it('Should find the number of paths to a max number of stops', function() {
+      assert.equal(graphNet.numPathsToMaxStops('A', 'B', 1), 1, 'num paths A->B 1 step is 1')
+      assert.equal(graphNet.numPathsToMaxStops('A', 'B', 9), 1, 'num paths A->B 9 step is 1')
+      assert.equal(graphNet.numPathsToMaxStops('A', 'C', 1), 0, 'num paths A->C 1 step is 0')
+      assert.equal(graphNet.numPathsToMaxStops('A', 'C', 2), 1, 'num paths A->C 2 step is 1')
+    });
+    it('Should find the number of paths to an exact number of stops', function() {
+      assert.equal(graphNet.numPathsToExactStops('A', 'B', 1), 1, 'num paths A->B 1 step is 1')
+      assert.equal(graphNet.numPathsToExactStops('A', 'B', 9), 0, 'num paths A->B 9 step is 0')
+      assert.equal(graphNet.numPathsToExactStops('A', 'C', 1), 0, 'num paths A->C 1 step is 0')
+      assert.equal(graphNet.numPathsToExactStops('A', 'C', 2), 1, 'num paths A->C 2 step is 1')
+      assert.equal(graphNet.numPathsToExactStops('A', 'C', 3), 0, 'num paths A->C 2 step is 0')
+    });
   });
-
 });

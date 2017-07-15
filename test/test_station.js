@@ -40,4 +40,10 @@ describe('Station',function(){
     assert.equal(statA.distanceOfPath(['B', 'C', 'D']), 7, 'Path A-B-C-D should be 7')
   });
 
+  it('Should find path to max stops', function() {
+    assert.deepEqual(statA.pathsToMaxStops('B', 2), [['A', 'B']], 'Paths A-B up to 2 stops')
+    assert.deepEqual(statA.pathsToMaxStops('C', 2), [['A', 'B', 'C']], 'Paths A-C up to 2 stops')
+    assert.deepEqual(statA.pathsToMaxStops('D', 2), [], 'Paths A-D up to 2 stops')
+  });
+
 });

@@ -24,18 +24,18 @@ describe('Trains problems',function(){
     assert.equal(net.getDistanceOfPath('A-E-D'), 'NO SUCH ROUTE', 'Output #5: NO SUCH ROUTE');
   });
   it('6. The number of trips starting at C and ending at C with a maximum of 3 stops.', function() {
-    assert.equal(null, 2, 'Output #6: 2');
+    assert.equal(net.numPathsToMaxStops('C', 'C', 3), 2, 'Output #6: 2');
   });
   it('7. The number of trips starting at A and ending at C with exactly 4 stops.', function() {
-    assert.equal(null, 3, 'Output #6: 2');
+    assert.equal(net.numPathsToExactStops('A', 'C', 4), 3, 'Output #7: 3');
   });
-  it('8. The length of the shortest route (in terms of distance to travel) from A to C.', function() {
-    assert.equal(null, 9, 'Output #6: 2');
-  });
-  it('9. The length of the shortest route (in terms of distance to travel) from B to B.', function() {
-    assert.equal(null, 9, 'Output #6: 2');
-  });
-  it('10. The number of different routes from C to C with a distance of less than 30.', function() {
-    assert.equal(null, 7, 'Output #6: 2');
-  });
+  // it('8. The length of the shortest route (in terms of distance to travel) from A to C.', function() {
+  //   assert.equal(null, 9, 'Output #6: 2');
+  // });
+  // it('9. The length of the shortest route (in terms of distance to travel) from B to B.', function() {
+  //   assert.equal(null, 9, 'Output #6: 2');
+  // });
+  // it('10. The number of different routes from C to C with a distance of less than 30.', function() {
+  //   assert.equal(null, 7, 'Output #6: 2');
+  // });
 });
