@@ -1,0 +1,24 @@
+{
+  "name": "train-problem",
+  "version": "1.0.0",
+  "description": "code challenge for Receptiviti",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArmelChesnais/Train-problem.git"
+  },
+  "author": "Armel Chesnais",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArmelChesnais/Train-problem/issues"
+  },
+  "homepage": "https://github.com/ArmelChesnais/Train-problem#readme",
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "mocha": "^3.4.2"
+  }
+}
