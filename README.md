@@ -4,9 +4,19 @@
 
 developped on node.js v6.10.3
 
+### setup:
 ```
 npm install
-npm start
+```
+
+### to run all tests and verify they pass:
+```
+npm test
+```
+
+### to run only the trains tests:
+```
+npm run test:trains
 ```
 
 ## Instructions
