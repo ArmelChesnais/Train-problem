@@ -52,5 +52,25 @@ describe('Network',function(){
       assert.equal(graphNet.numPathsToExactStops('A', 'C', 2), 1, 'num paths A->C 2 step is 1')
       assert.equal(graphNet.numPathsToExactStops('A', 'C', 3), 0, 'num paths A->C 2 step is 0')
     });
+    it('should find the shortest route distance', function() {
+      assert.equal(graphNet.shortestRouteDistance('A', 'B'), 1, 'shortest A->B id 1')
+      assert.equal(graphNet.shortestRouteDistance('B', 'C'), 2, 'shortest B->C id 2')
+      assert.equal(graphNet.shortestRouteDistance('A', 'C'), 3, 'shortest A->C id 3')
+    })
+  });
+
+  describe('Network using question values', function() {
+    let questNet = new Network('AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7');
+    it('should find the number of paths to a max number of stops', function() {
+      assert.equal(questNet.numPathsToMaxStops('E', 'A', 10), 0, 'num paths E->A 10 step is 0')
+      assert.equal(questNet.numPathsToMaxStops('A', 'E', 4), 7, 'num paths A->E 4 step is 7')
+      assert.equal(questNet.numPathsToMaxStops('A', 'E', 1), 1, 'num paths A->E 1 step is 1')
+      assert.equal(questNet.numPathsToMaxStops('A', 'E', 2), 2, 'num paths A->E 2 step is 2')
+    });
+    it('should find the shortest route distance', function() {
+      assert.equal(questNet.shortestRouteDistance('A', 'B'), 5, 'shortest A->B id 5')
+      assert.equal(questNet.shortestRouteDistance('B', 'C'), 4, 'shortest B->C id 4')
+      assert.equal(questNet.shortestRouteDistance('A', 'C'), 9, 'shortest A->C id 9')
+    })
   });
 });

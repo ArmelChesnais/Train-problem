@@ -46,4 +46,8 @@ describe('Station',function(){
     assert.deepEqual(statA.pathsToMaxStops('D', 2), [], 'Paths A-D up to 2 stops')
   });
 
+  it('Should get a list of connection IDs', function() {
+    assert.deepEqual(statA.getConnectionIds(), ['B'], 'shows connection ID B')
+  });
+
 });
