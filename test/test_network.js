@@ -53,10 +53,60 @@ describe('Network',function(){
       assert.equal(graphNet.numPathsToExactStops('A', 'C', 3), 0, 'num paths A->C 2 step is 0')
     });
     it('should find the shortest route distance', function() {
-      assert.equal(graphNet.shortestRouteDistance('A', 'B'), 1, 'shortest A->B id 1')
-      assert.equal(graphNet.shortestRouteDistance('B', 'C'), 2, 'shortest B->C id 2')
-      assert.equal(graphNet.shortestRouteDistance('A', 'C'), 3, 'shortest A->C id 3')
+      assert.equal(graphNet.shortestRouteDistance('A', 'B'), 1, 'shortest A->B is 1')
+      assert.equal(graphNet.shortestRouteDistance('B', 'C'), 2, 'shortest B->C is 2')
+      assert.equal(graphNet.shortestRouteDistance('A', 'C'), 3, 'shortest A->C is 3')
     })
+
+    it('should find the number of routes within a certain distance', function() {
+      assert.equal(graphNet.numRoutesWithinDistance('A', 'C', 1), 0, 'number of routes within 2 distance from A->C is 0')
+      assert.equal(graphNet.numRoutesWithinDistance('A', 'B', 2), 1, 'number of routes within 2 distance from A->B is 1')
+      assert.equal(graphNet.numRoutesWithinDistance('A', 'C', 10), 1, 'number of routes within 10 distance from A->C is 1')
+
+    })
+  });
+
+  describe('Network using branching-converging values', function() {
+    let branchNet = new Network('AB1, BC8, CD4, DE2, AL1, LM1, MN1, NO1, OC1');
+    it('should find the number of paths to a max number of stops', function() {
+      assert.equal(branchNet.numPathsToMaxStops('E', 'A', 10), 0, 'num paths E->A 10 step is 0')
+      assert.equal(branchNet.numPathsToMaxStops('A', 'C', 1), 0, 'num paths A->C 1 step is 0')
+      assert.equal(branchNet.numPathsToMaxStops('A', 'C', 2), 1, 'num paths A->C 2 step is 1')
+      assert.equal(branchNet.numPathsToMaxStops('A', 'C', 6), 2, 'num paths A->C 6 step is 2')
+    });
+    it('should find the shortest route distance', function() {
+      assert.equal(branchNet.shortestRouteDistance('A', 'B'), 1, 'shortest A->B is 1')
+      assert.equal(branchNet.shortestRouteDistance('B', 'C'), 8, 'shortest B->C is 8')
+      assert.equal(branchNet.shortestRouteDistance('A', 'C'), 5, 'shortest A->C is 5')
+    })
+    it('should find The number of different routes less than a distance.', function() {
+      assert.equal(branchNet.numRoutesWithinDistance('A', 'C', 1), 0, 'num routes A->C within distance 1: 0');
+      assert.equal(branchNet.numRoutesWithinDistance('A', 'C', 6), 1, 'num routes A->C within distance 6: 1');
+      assert.equal(branchNet.numRoutesWithinDistance('A', 'C', 10), 2, 'num routes A->C within distance 10: 2');
+    });
+  });
+
+  describe('Network using looping values', function() {
+    let branchNet = new Network('AB1, BC8, CD4, DE2, DL1, LM1, MN1, NO1, OB1');
+    it('should find the number of paths to a max number of stops', function() {
+      assert.equal(branchNet.numPathsToMaxStops('E', 'A', 10), 0, 'num paths E->A 10 stop is 0')
+      assert.equal(branchNet.numPathsToMaxStops('A', 'C', 1), 0, 'num paths A->C 1 stop is 0')
+      assert.equal(branchNet.numPathsToMaxStops('A', 'C', 2), 1, 'num paths A->C 2 stop is 1')
+      assert.equal(branchNet.numPathsToMaxStops('A', 'C', 10), 2, 'num paths A->C 6 stop is 2')
+      assert.equal(branchNet.numPathsToMaxStops('D', 'B', 12), 2, 'num paths D->B 12 stop is 2')
+      assert.equal(branchNet.numPathsToMaxStops('D', 'B', 7), 1, 'num paths D->B 7 stop is 1')
+    });
+    it('should find the shortest route distance', function() {
+      assert.equal(branchNet.shortestRouteDistance('A', 'B'), 1, 'shortest A->B is 1')
+      assert.equal(branchNet.shortestRouteDistance('B', 'C'), 8, 'shortest B->C is 8')
+      assert.equal(branchNet.shortestRouteDistance('A', 'C'), 9, 'shortest A->C is 9')
+      assert.equal(branchNet.shortestRouteDistance('C', 'B'), 9, 'shortest C->B is 9')
+    })
+    it('should find The number of different routes less than a distance.', function() {
+      assert.equal(branchNet.numRoutesWithinDistance('A', 'C', 1), 0, 'num routes A->C within distance 1: 0');
+      assert.equal(branchNet.numRoutesWithinDistance('A', 'C', 10), 1, 'num routes A->C within distance 10: 1');
+      assert.equal(branchNet.numRoutesWithinDistance('A', 'C', 27), 2, 'num routes A->C within distance 27: 2');
+    });
   });
 
   describe('Network using question values', function() {
@@ -68,9 +118,9 @@ describe('Network',function(){
       assert.equal(questNet.numPathsToMaxStops('A', 'E', 2), 2, 'num paths A->E 2 step is 2')
     });
     it('should find the shortest route distance', function() {
-      assert.equal(questNet.shortestRouteDistance('A', 'B'), 5, 'shortest A->B id 5')
-      assert.equal(questNet.shortestRouteDistance('B', 'C'), 4, 'shortest B->C id 4')
-      assert.equal(questNet.shortestRouteDistance('A', 'C'), 9, 'shortest A->C id 9')
+      assert.equal(questNet.shortestRouteDistance('A', 'B'), 5, 'shortest A->B is 5')
+      assert.equal(questNet.shortestRouteDistance('B', 'C'), 4, 'shortest B->C is 4')
+      assert.equal(questNet.shortestRouteDistance('A', 'C'), 9, 'shortest A->C is 9')
     })
   });
 });
